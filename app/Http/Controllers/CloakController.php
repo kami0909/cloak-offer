@@ -10,30 +10,16 @@ class CloakController extends Controller
     public function landing()
     {
         $country = request()->header('CF-IPCountry');
-
-        if ($country === 'VN') {
-            return redirect()->away('https://example.vn');
-        } elseif ($country === 'US') {
-            return redirect()->away('https://example.us');
+        $country = strtolower($country);
+        if ($country === 'vn') {
+            return redirect()->away('https://dneybay.com/products/winter-long-plush-pet-cat-bed-round-cat-cushion-cat-house-2-in-1-warm-cat-basket-cat-sleep-bag-cat-nest-kennel-for-small-dog-cat');
         }
 
-        // Xử lý cho các quốc gia khác
-
-        return redirect()->away('https://google.com');
+        return redirect()->away('https://magidbox.com/products/winter-long-plush-pet-cat-bed-round-cat-cushion-cat-house-2-in-1-warm-cat-basket-cat-sleep-bag-cat-nest-kennel-for-small-dog-cat');
     }
 
     public function payment()
     {
-        $country = request()->header('CF-IPCountry');
 
-        if ($country === 'VN') {
-            return redirect()->away('https://payment-vn.com');
-        } elseif ($country === 'US') {
-            return redirect()->away('https://payment-us.com');
-        }
-
-        // Xử lý cho các quốc gia khác
-
-        return redirect()->away('https://google.com');
     }
 }

@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\CloakController::class, 'landing']);
 
-Route::get('/landing', [\App\Http\Controllers\CloakController::class, 'landing']);
-
-Route::get('/landing', [\App\Http\Controllers\CloakController::class, 'payment']);
+Route::get('/payment', [\App\Http\Controllers\CloakController::class, 'payment']);
