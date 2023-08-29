@@ -3,20 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LandingPage;
 
 class CloakController extends Controller
 {
 
     public function landing()
     {
-        $country = request()->header('CF-IPCountry');
-        $country = strtolower($country);
-        if ($country === 'vn') {
-            return redirect()->away('https://dneybay.com/products/winter-long-plush-pet-cat-bed-round-cat-cushion-cat-house-2-in-1-warm-cat-basket-cat-sleep-bag-cat-nest-kennel-for-small-dog-cat');
+        $country = strtolower(request()->header('CF-IPCountry'));
+        if ($country === 'vn' || $country === 'tr') {
+            return redirect()->away('https://dneybay.com');
         }
 
-        return redirect()->away('https://magidbox.com/products/winter-long-plush-pet-cat-bed-round-cat-cushion-cat-house-2-in-1-warm-cat-basket-cat-sleep-bag-cat-nest-kennel-for-small-dog-cat');
+        $path = request()->path();
+        $landingPage = LandingPage::where('path', $path)->first();
+        if ($landingPage) {
+            $target = $landingPage->target;
+            var_dump($target);
+            if (isset($target[$country])) {
+                $targetUrl = $target[$country];
+                return redirect()->away($targetUrl);
+            }
+        }
+        return redirect()->away('https://magidbox.com/collections/all');
     }
+
 
     public function payment()
     {
