@@ -11,7 +11,7 @@ class CloakController extends Controller
     public function landing()
     {
         $country = strtolower(request()->header('CF-IPCountry'));
-        if ($country === 'vn' || $country === 'tr') {
+        if ($country === 'vn') {
             return redirect()->away('https://dneybay.com');
         }
 
