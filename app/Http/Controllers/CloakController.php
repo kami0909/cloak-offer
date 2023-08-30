@@ -14,9 +14,17 @@ class CloakController extends Controller
         if ($country === 'vn') {
             return redirect()->away('https://dneybay.com');
         }
-        var_dump($country);
-        
-        
+        $path = request()->path();
+        $landingPage = LandingPage::where('path', $path)->first();
+        if ($landingPage) {
+            $target = $landingPage->target;
+
+            if (isset($target[$country])) {
+                $targetUrl = $target[$country];
+                return redirect()->away($targetUrl);
+            }
+        }
+        return redirect()->away('https://magidbox.com/collections/all');
     }
 
 
