@@ -24,7 +24,7 @@ class CloakController extends Controller
                 return redirect()->away($targetUrl);
             }
         }
-        return redirect()->away('https://magidbox.com/collections/all');
+        return redirect()->away('https://dadacart.com/collections/all');
     }
 
 
