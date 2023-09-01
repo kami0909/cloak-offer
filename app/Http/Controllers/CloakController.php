@@ -12,7 +12,7 @@ class CloakController extends Controller
     {
         $country = strtolower(request()->header('CF-IPCountry'));
         if ($country === 'vn') {
-            return redirect()->away('https://dneybay.com');
+            return redirect()->away('https://figurcare.com/collections/all');
         }
         $path = request()->path();
         $landingPage = LandingPage::where('path', $path)->first();
@@ -24,12 +24,17 @@ class CloakController extends Controller
                 return redirect()->away($targetUrl);
             }
         }
-        return redirect()->away('https://dadacart.com/collections/all');
+        return redirect()->away('https://figurcare.com/collections/all');
     }
 
 
     public function payment()
     {
 
+    }
+
+    public function index()
+    {
+        return redirect()->away('https://figurcare.com/collections/all');
     }
 }

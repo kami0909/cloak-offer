@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', [\App\Http\Controllers\CloakController::class, 'index']);
 
 Route::get('/{path}', [\App\Http\Controllers\CloakController::class, 'landing']);
 
-//Route::get('/payment', [\App\Http\Controllers\CloakController::class, 'payment']);
+Route::get('/payment/{path}', [\App\Http\Controllers\CloakController::class, 'payment']);
+
