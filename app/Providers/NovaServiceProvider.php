@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Nova\Source;
+use App\Nova\Country;
+use App\Nova\Offer;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
@@ -17,13 +20,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
-        Nova::routes()
-            ->withAuthenticationRoutes()
-            ->withPasswordResetRoutes()
-            ->register();
 
         Nova::resources([
             LandingPage::class,
+            Country::class,
+            Offer::class,
+            Source::class
         ]);
     }
 

@@ -9,20 +9,11 @@ class LandingPage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['path', 'target'];
+    protected $fillable = ['title', 'included_countries', 'excluded_countries', 'target_url', 'redirect_url', 'offer_id', 'source_id'];
 
-    protected $casts = [
-        'target' => 'array'
+    protected $casts =[
+        'included_countries' => 'json',
+        'excluded_countries' => 'json'
     ];
-
-    public function getTargetCountry()
-    {
-        return $this->target['target_country'] ?? null;
-    }
-
-    public function getTargetUrl()
-    {
-        return $this->target['target_url'] ?? null;
-    }
 
 }

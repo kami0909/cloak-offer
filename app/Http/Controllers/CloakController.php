@@ -11,17 +11,19 @@ class CloakController extends Controller
     public function landing()
     {
         $country = strtolower(request()->header('CF-IPCountry'));
-        if ($country === 'vn') {
-            return redirect()->away('https://figurcare.com/collections/all');
-        }
         $path = request()->path();
         $landingPage = LandingPage::where('path', $path)->first();
-        if ($landingPage) {
-            $target = $landingPage->target;
 
-            if (isset($target[$country])) {
-                $targetUrl = $target[$country];
-                return redirect()->away($targetUrl);
+        if ($landingPage) {
+            if ($country === 'vn') {
+                if ($landingPage->redirect_url) {
+                    return redirect()->away($landingPage->redirect_url);
+                }
+                return redirect()->away('https://figurcare.com/collections/all');
+            }
+
+            if ($landingPage->target_url) {
+                return redirect()->away($landingPage->target_url);
             }
         }
         return redirect()->away('https://figurcare.com/collections/all');

@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('landing_pages', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->unique();
             $table->string('path')->unique();
-            $table->json('target');
+            $table->json('included_countries')->nullable(true);
+            $table->json('excluded_countries')->nullable(true);
+            $table->string('target_url');
+            $table->string('redirect_url');
+            $table->foreignId('offer_id')->constrained('offers');
+            $table->foreignId('source_id')->constrained('sources');
             $table->timestamps();
         });
     }
