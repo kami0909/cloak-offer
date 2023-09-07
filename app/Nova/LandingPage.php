@@ -72,9 +72,9 @@ class LandingPage extends Resource
             MultiSelect::make('Excluded Countries')
                 ->options($this->getCountries())
                 ->required(),
-            Text::make('Target Url')
+            Text::make('Money Page', 'target_url')
                 ->required(),
-            Text::make('Redirect Url')
+            Text::make('Safe Page', 'redirect_url')
                 ->required(),
             Select::make('Source', 'source_id')
                 ->searchable()
