@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Models\Country;
 use App\Models\Offer;
 use App\Models\Source;
+use App\Nova\Filters\LandingPageUserFilter;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MultiSelect;
@@ -83,6 +84,11 @@ class LandingPage extends Resource
         ];
     }
 
+    public static function indexQuery(Request $request, $query)
+    {
+        return $query->where('user_id', $request->user()->id);
+    }
+
     public static function canSee(Request $request)
     {
         return $request->user()->id === $request->resource()->user_id;
@@ -125,7 +131,8 @@ class LandingPage extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+        ];
     }
 
     /**
