@@ -86,6 +86,9 @@ class LandingPage extends Resource
 
     public static function indexQuery(Request $request, $query)
     {
+        if ($request->user()->isAdmin()) {
+            return $query;
+        }
         return $query->where('user_id', $request->user()->id);
     }
 
