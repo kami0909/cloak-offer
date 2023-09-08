@@ -66,21 +66,27 @@ class LandingPage extends Resource
             Select::make('Supplier', 'offer_id')
                 ->searchable()
                 ->options($this->getOffers())
-                ->required(),
+                ->required()
+                ->hideFromIndex(),
             MultiSelect::make('Included Countries')
                 ->options($this->getCountries())
-                ->required(),
+                ->required()
+                ->hideFromIndex(),
             MultiSelect::make('Excluded Countries')
                 ->options($this->getCountries())
-                ->required(),
+                ->required()
+                ->hideFromIndex(),
             Text::make('Money Page', 'target_url')
-                ->required(),
+                ->required()
+                ->hideFromIndex(),
             Text::make('Safe Page', 'redirect_url')
-                ->required(),
+                ->required()
+                ->hideFromIndex(),
             Select::make('Source', 'source_id')
                 ->searchable()
                 ->options($this->getSources())
-                ->required(),
+                ->required()
+                ->hideFromIndex(),
         ];
     }
 
