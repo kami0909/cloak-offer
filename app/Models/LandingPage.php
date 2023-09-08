@@ -16,4 +16,13 @@ class LandingPage extends Model
         'excluded_countries' => 'json'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($landingPage) {
+            $landingPage->user_id = auth()->id();
+        });
+    }
+
 }

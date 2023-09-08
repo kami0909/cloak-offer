@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('redirect_url');
             $table->foreignId('offer_id')->constrained('offers');
             $table->foreignId('source_id')->constrained('sources');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

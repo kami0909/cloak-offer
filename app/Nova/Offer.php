@@ -43,14 +43,18 @@ class Offer extends Resource
         return [
             ID::make()->sortable(),
             Text::make('code')
-                ->rules('required, unique:offers, code'),
+                ->rules('required', 'unique:offers,code'),
             Text::make('title')
-                ->rules('required, unique:offers, title'),
+                ->rules('required', 'unique:offers,title'),
             Text::make('url')
-                ->rules('required, unique:offers, url')
+                ->rules('required', 'unique:offers,url')
         ];
     }
 
+    public static function availableForNavigation(Request $request)
+    {
+        return $request->user()->isAdmin();
+    }
 
 
 

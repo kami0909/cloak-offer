@@ -2,11 +2,13 @@
 
 namespace App\Nova;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -62,9 +64,23 @@ class User extends Resource
                 ->onlyOnForms()
                 ->creationRules('required', Rules\Password::defaults())
                 ->updateRules('nullable', Rules\Password::defaults()),
+            Select::make('Role', 'role_code')
+                ->searchable()
+                ->options($this->getRoles())
+                ->required(),
         ];
     }
 
+    protected function getRoles(): array
+    {
+        $roles = Role::pluck('name', 'code')->toArray();
+        return $roles;
+    }
+
+    public static function availableForNavigation(Request $request)
+    {
+        return $request->user()->isAdmin();
+    }
     /**
      * Get the cards available for the request.
      *

@@ -83,6 +83,11 @@ class LandingPage extends Resource
         ];
     }
 
+    public static function canSee(Request $request)
+    {
+        return $request->user()->id === $request->resource()->user_id;
+    }
+
     protected function getCountries(): array
     {
         $countries = Country::pluck('name', 'code')->toArray();
