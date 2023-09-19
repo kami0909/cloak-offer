@@ -26,7 +26,7 @@ class CloakController extends Controller
                 return redirect()->away($landingPage->target_url);
             }
         }
-        return redirect()->away('https://figurcare.com/collections/all');
+        return redirect()->away('https://youtube.com');
     }
 
 
